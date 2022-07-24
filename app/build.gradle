@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id("androidx.navigation.safeargs")
 }
 
 apply plugin: 'kotlin-android-extensions'
@@ -41,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.mlkit:image-labeling-common:18.0.0'
+    implementation 'com.google.mlkit:image-labeling-default-common:17.0.0'
     def camerax_version = "1.1.0-beta01"
 
     implementation 'androidx.core:core-ktx:1.7.0'

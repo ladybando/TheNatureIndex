@@ -14,10 +14,10 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.android.thenatureindex.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -55,11 +55,15 @@ class HomeFragment : Fragment() {
     ) {
         val imageBitmap = it.data!!.extras!!.get("data") as Bitmap
         if (it.resultCode == Activity.RESULT_OK) {
-            binding.imageCapButton.setImageBitmap(imageBitmap)
+            binding.capturedImageView.setImageBitmap(imageBitmap)
+        }
+        binding.capturedImageView.setOnClickListener {
+            val action = HomeFragmentDirections.actionNavHomeToNavGallery(imageBitmap)
+            findNavController().navigate(action)
         }
     }
 
-    fun openCamera() {
+    private fun openCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
             getResult.launch(takePictureIntent)
